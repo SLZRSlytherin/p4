@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= course.title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1><%= course.title %></h1>
+        <p><%= course.description %></p>
+    </header>
+    <main>
+        <h2>Video Pembelajaran</h2>
+        <ul>
+            <% videos.forEach(video => { %>
+                <li>
+                    <h3><%= video.title %></h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/BzYMFd-lQL4?si=DqnlA4kqv6TGTqkS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                     <a href="/videos/<%= video.id %>">Hapus</a>
+                </li>
+            <% }) %>
+        </ul>
+
+        <h3>Tambah Video Baru</h3>
+<form action="/course/<%= course.id %>/videos" method="POST">
+    <input type="hidden" name="courseId" value="<%= course.id %>"> <!-- Input tersembunyi untuk course_id -->
+    <input type="text" name="title" placeholder="Judul Video" required>
+    <input type="url" name="videoUrl" placeholder="URL Video" required>
+    <button type="submit">Tambah Video</button>
+</form>
+    </main>
+    <footer>
+        <p>&copy; 2023 E-Course Platform</p>
+    </footer>
+</body>
+</html>
